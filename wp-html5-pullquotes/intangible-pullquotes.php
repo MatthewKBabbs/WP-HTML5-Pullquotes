@@ -9,6 +9,7 @@ Author URI: http://intangiblestyle.com/
 License: GPLv2
 */
 ?>
+
 <?php
 /*  Copyright 2012  Matthew K Babbs  (email : matthew@intangiblestyle.com)
 
@@ -25,4 +26,36 @@ License: GPLv2
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+?>
+
+<?php
+// Plugin itself
+// Add data-pullquote attribute to TinyMCE
+function istyle_data-pullquote_attributes($initArray) {
+	// Comma separated string of additional tags
+	// Command separated string of attributes for additional tags
+	$ext = 'p[data-pullquote],li[data-pullquote],div[data-pullquote],span[data-pullquote]';
+	if ( isset( $initArray['extended_valid_elements'] ) ) {
+		$initArray['extended_valid_elements'] .= ',' . $ext;
+	} else {
+		$initArray['extended_valid_elements'] = $ext;
+	}
+	return $initArray;
+}
+add_filter('tiny_mce_before_init', 'istyle_data-pullquote_attributes');
+
+// add styles to TinyMCE: http://codex.wordpress.org/Plugin_API/Filter_Reference/mce_css
+/*
+function plugin_mce_css( $mce_css ) {
+	if ( ! empty( $mce_css ) )
+		$mce_css .= ',';
+
+	$mce_css .= plugins_url( 'editor.css', __FILE__ );
+
+	return $mce_css;
+}
+add_filter( 'mce_css', 'plugin_mce_css' );
+*/
+
+// wp_enqueue_style to add css file with default styling for pullquotes
 ?>
