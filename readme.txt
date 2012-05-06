@@ -1,1 +1,0 @@
-wp-html5-pullquotes/readme.txt
