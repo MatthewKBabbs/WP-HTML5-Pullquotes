@@ -3,7 +3,7 @@
 Plugin Name: WP-HTML5-Pullquotes
 Plugin URI: http://intangiblestyle.com/lab/intangible-pullquotes-wordpress-plugin/
 Description: Create pullquotes in WordPress posts without duplicte content, using HTML5.
-Version: 0.1
+Version: 0.2
 Author: Matthew K Babbs
 Author URI: http://intangiblestyle.com/
 License: GPL3
@@ -28,7 +28,7 @@ License: GPL3
 <?php
 // Add data-pullquote attribute to TinyMCE
 function istyle_data_pullquote_attributes($initArray) {
-	$ext = '@[data-pullquote]';
+	$ext = 'p[data-pullquote],li[data-pullquote],ul[data-pullquote],ol[data-pullquote],div[data-pullquote],span[data-pullquote]';
 	if (isset( $initArray['extended_valid_elements'])) {
 		$initArray['extended_valid_elements'] .= ',' . $ext;
 	} else {
@@ -43,7 +43,7 @@ function istyle_data_pullquote_mce_css($mce_css) {
 	if (!empty($mce_css)) {
 		$mce_css .= ',';
 	}
-	$mce_css .= plugins_url('wp-html5-pullquote-editor.css', __FILE__ )
+	$mce_css .= plugins_url('wp-html5-pullquote-editor.css', __FILE__);
 	return $mce_css;
 }
 add_filter( 'mce_css', 'istyle_data_pullquote_mce_css' );
