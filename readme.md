@@ -16,27 +16,27 @@ With plugin installed & activated, create a pullquote in Wordpress's HTML editor
 	<p data-pullquote="This is the pullquote content">This is a regular paragraph. It just happens to have a pullquote next to it.</p>
 
 You'll have to add CSS to your theme to display the content of the data-pullquote attribute as a pullquote - this plugin doesn't yet add any default styles to do that! Here's an example:
-	[data-pullquote]:before {
-		/* Reset metrics. */
-		padding: 0;
-		border: none;
+		[data-pullquote]:before {
+			/* Reset metrics. */
+			padding: 0;
+			border: none;
 	
-		/* Content */
-		content: attr(data-pullquote);
+			/* Content */
+			content: attr(data-pullquote);
 	
-		/* Pull out to the right, modular scale based margins. */
-		float: right;
-		width: 320px;
-		margin: 12px -140px 24px 36px;
+			/* Pull out to the right, modular scale based margins. */
+			float: right;
+			width: 320px;
+			margin: 12px -140px 24px 36px;
 	
-		/* Baseline correction */
-		position: relative;
-		top: 5px;
+			/* Baseline correction */
+			position: relative;
+			top: 5px;
 	
-		/* Typography (30px line-height equals 25% incremental leading) */
-		font-size: 23px;
-		line-height: 30px;
-	}
+			/* Typography (30px line-height equals 25% incremental leading) */
+			font-size: 23px;
+			line-height: 30px;
+		}
 
 Changelist
 --------------------------
