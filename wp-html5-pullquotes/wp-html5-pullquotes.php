@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Intangible-Pullquotes
+Plugin Name: WP-HTML5-Pullquotes
 Plugin URI: http://intangiblestyle.com/lab/intangible-pullquotes-wordpress-plugin/
 Description: Create pullquotes in WordPress posts without duplicte content, using HTML5.
 Version: 0.1
@@ -29,7 +29,7 @@ License: GPL3
 // Add data-pullquote attribute to TinyMCE
 function istyle_data_pullquote_attributes($initArray) {
 	$ext = '@[data-pullquote]';
-	if ( isset( $initArray['extended_valid_elements'] ) ) {
+	if (isset( $initArray['extended_valid_elements'])) {
 		$initArray['extended_valid_elements'] .= ',' . $ext;
 	} else {
 		$initArray['extended_valid_elements'] = $ext;
@@ -38,18 +38,16 @@ function istyle_data_pullquote_attributes($initArray) {
 }
 add_filter('tiny_mce_before_init', 'istyle_data_pullquote_attributes');
 
-// add styles to TinyMCE: http://codex.wordpress.org/Plugin_API/Filter_Reference/mce_css
-/*
-function plugin_mce_css( $mce_css ) {
-	if ( ! empty( $mce_css ) )
+// add styles to display in TinyMCE visual editor
+function istyle_data_pullquote_mce_css($mce_css) {
+	if (!empty($mce_css)) {
 		$mce_css .= ',';
-
-	$mce_css .= plugins_url( 'editor.css', __FILE__ );
-
+	}
+	$mce_css .= plugins_url('wp-html5-pullquote-editor.css', __FILE__ )
 	return $mce_css;
 }
-add_filter( 'mce_css', 'plugin_mce_css' );
-*/
+add_filter( 'mce_css', 'istyle_data_pullquote_mce_css' );
+
 
 // wp_enqueue_style to add css file with default styling for pullquotes
 ?>
