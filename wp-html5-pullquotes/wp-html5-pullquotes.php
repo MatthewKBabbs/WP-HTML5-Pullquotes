@@ -39,7 +39,6 @@ function istyle_data_pullquote_attributes($initArray) {
 add_filter('tiny_mce_before_init', 'istyle_data_pullquote_attributes');
 
 // add styles to display in TinyMCE visual editor
-/*
 function istyle_data_pullquote_mce_css($mce_css) {
 	if (!empty($mce_css)) {
 		$mce_css .= ',';
@@ -48,7 +47,6 @@ function istyle_data_pullquote_mce_css($mce_css) {
 	return $mce_css;
 }
 add_filter( 'mce_css', 'istyle_data_pullquote_mce_css' );
-*/
 
 // wp_enqueue_style to add css file with default styling for pullquotes
 ?>
