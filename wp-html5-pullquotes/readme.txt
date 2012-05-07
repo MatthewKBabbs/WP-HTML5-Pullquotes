@@ -41,6 +41,9 @@ You'll have to add CSS to your theme to display the content of the data-pullquot
 Changelist
 --------------------------
 
+### v0.2
+Pullquotes are now visible in the Wordpress visual editor.
+
 ### v0.1:
 Initial version - prevents TinyMCE from stripping out the data-pullquote attribute.
 No default styles for pullquotes - must be provided by your theme.
