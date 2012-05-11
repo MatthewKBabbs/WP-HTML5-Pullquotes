@@ -1,22 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="wp-html5-pullquotes" default="main">
+<!-- Tasks:
+			* PHPLint
+			* Run unit tests
+			* Run integration tests
+			* Create tar.gz package for distribution
+			* Deploy plugin to test server
+			* Create a new release on svn.wp-plugins.org
+-->
+<!-- Define build properties file -->
+	<target name="load.properties">
+		 <property file="build.properties"/>
+	</target>
 
 	<fileset dir="./wp-html5-pullquotes" id="files.plugin">
 		<include name="*.*" />
 	</fileset>
 
+	<fileset dir="./wp-html5-pullquotes" id="files.php.plugin">
+		<include name="**.php" />
+	</fileset>
+
+	<fileset dir="./wp-html5-pullquotes" id="files.js.plugin">
+		<include name="**.js" />
+	</fileset>	
+
+	<target name="phplint">
+		<echo msg="Running PHPLint to check syntax of PHP files" />
+		<phplint>
+			<fileset refid="files.php.plugin" />
+		</phplint>
+	</target>
+
+	<target name="jslint">
+		<echo msg="Running JSLint to check syntax of JavaScript files" />
+		<phplint>
+			<fileset refid="files.js.plugin" />
+		</phplint>
+	</target>
+
 	<target name="prepare">
-        <echo msg="Making directory ./build" />
-        <mkdir dir="./build" />
-   </target>
+		<echo msg="Cleaning up any leftovers from previous build"/>
+		<delete dir="./dist" includeemptydirs="true" verbose="true" failonerror="true" />
+		<echo msg="Making directory ./dist" />
+		<mkdir dir="./dist" />
+	</target>
 
 	<target name="main" depends="prepare">
-		<delete file="./build/wp-html5-pullquotes.tar.gz" />
 		<echo msg="Creating archive..." />
 			<tar destfile="./build/wp-html5-pullquotes.tar.gz" compression="gzip" prefix="./wp-html5-pullquotes">
 				<fileset refid="files.plugin" />
 			</tar>
-		<echo msg="Files compressed into archive in build directory OK!" />
+		<echo msg="Files compressed into archive in dist directory OK!" />
 	</target>
 
 </project>
