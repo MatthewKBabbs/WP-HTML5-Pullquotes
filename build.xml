@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wp-html5-pullquotes" default="main">
+
+	<fileset dir="./wp-html5-pullquotes" id="files.plugin">
+		<include name="*.*" />
+	</fileset>
+
+	<target name="prepare">
+        <echo msg="Making directory ./build" />
+        <mkdir dir="./build" />
+   </target>
+
+	<target name="main" depends="prepare">
+		<delete file="./build/wp-html5-pullquotes.tar.gz" />
+		<echo msg="Creating archive..." />
+			<tar destfile="./build/wp-html5-pullquotes.tar.gz" compression="gzip" prefix="./wp-html5-pullquotes">
+				<fileset refid="files.plugin" />
+			</tar>
+		<echo msg="Files compressed into archive in build directory OK!" />
+	</target>
+
+</project>
+
