@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="wp-html5-pullquotes" default="main">
-<!-- Tasks:
+<!-- Tasks to add:
 			* PHPLint
 			* Run unit tests
 			* Run integration tests
 			* Create tar.gz package for distribution
-			* Deploy plugin to test server
+			* Deploy plugin to localserve
 			* Create a new release on svn.wp-plugins.org
 -->
 <!-- Define build properties file -->
@@ -37,6 +37,12 @@
 		</phplint>
 	</target>
 
+	<target name="deploy.test">
+		<copy todir="${test.dir}/${phing.project.name}" overwrite="true">
+			<fileset refid="files.plugin" />
+		</copy>
+	</target>
+
 	<target name="prepare">
 		<echo msg="Cleaning up any leftovers from previous build"/>
 		<delete dir="${dist.dir}" includeemptydirs="true" verbose="true" failonerror="true" />
@@ -46,7 +52,7 @@
 
 	<target name="main" depends="prepare">
 		<echo msg="Creating archive..." />
-			<tar destfile="${dist.dir}/wp-html5-pullquotes.tar.gz" compression="gzip" prefix="./wp-html5-pullquotes">
+			<tar destfile="${dist.dir}/${phing.project.name}.tar.gz" compression="gzip" prefix="./${phing.project.name}">
 				<fileset refid="files.plugin" />
 			</tar>
 		<echo msg="Files compressed into archive in dist directory OK!" />
