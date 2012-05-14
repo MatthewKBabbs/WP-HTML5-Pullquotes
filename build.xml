@@ -43,6 +43,12 @@
 		</copy>
 	</target>
 
+	<target name="deploy.remote.test">
+		<scp username="matthew" pubkeyfile="/home/matthew/.ssh/id_rsa" host="solusar" todir="/home/matthew/istyle/wp-content/plugins/${phing.project.name}">
+			 <fileset refid="files.plugin" />
+		</scp>
+	</target>
+
 	<target name="prepare">
 		<echo msg="Cleaning up any leftovers from previous build"/>
 		<delete dir="${dist.dir}" includeemptydirs="true" verbose="true" failonerror="true" />
