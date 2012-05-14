@@ -25,10 +25,35 @@ function html5_pullquotes_settings_page() {
 	if (!current_user_can('manage_options')) {
 		wp_die(__('You do not have sufficient permissions to access this page.'));
 	}
+?>
+<div class="wrap">
+	<h2>HTML5 Pullquotes plugin</h2>
+	<form action="options.php" method="post">
+		<?php settings_fields('html5_pullquotes_plugin_options'); ?>
+		<?php do_settings_sections('html5_pullquotes_plugin'); ?>
+		<input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
+	</form>
+</div>
+<?php
+}
 
-	echo '<div class="wrap">';
-	echo '<p>Here is where the form would go if I actually had options.</p>';
-	echo '</div>';
+// add the admin settings and such
+add_action('admin_init', 'html5_pullquotes_admin_init');
+function html5_pullquotes_admin_init(){
+	register_setting( 'html5_pullquotes_plugin_options', 'html5_pullquotes_plugin_options', 'html5_pullquotes_plugin_options_validate' );
+	add_settings_section('plugin_styles', 'Pullquote Styles', 'plugin_styles_section_callback', 'html5_pullquotes_plugin');
+	add_settings_section('legacy_compatibility', 'Legacy Compatibility', 'legacy_compatibility_section_callback', 'html5_pullquotes_plugin');
+}
+
+// Callback to provide descriptive text for plugin_styles section
+function plugin_styles_section_callback() {
+	echo '<p>Main description of this section here.</p>';
+}
+// Callback to provide descriptive text for legacy_compatibility section
+function legacy_compatibility_section_callback() {
+	echo '<p>Enable compatibility with legacy browsers IE6 and IE7. It&rsquo;s recommended to check your site logs before enabling this, as many sites have very few visits from such old browsers!</p>';
+}
+
 /* Options:
 		* Inject pullquote styles into my theme
 			* Font-family [Should this be implied?]
@@ -37,5 +62,4 @@ function html5_pullquotes_settings_page() {
 			* background-colour
 		* Force compatibility with old versions of Internet Explorer
 */
-}
 ?>
