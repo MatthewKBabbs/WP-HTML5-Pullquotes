@@ -28,7 +28,7 @@ License: GPL3
 <?php
 // Plugin admin code
 $html5_pullquotes_admin = plugins_url('settings.php', __FILE__);
-include $html5_pullquotes_admin;
+include 'settings.php';
 
 // Add data-pullquote attribute to TinyMCE
 function istyle_data_pullquote_attributes($initArray) {
