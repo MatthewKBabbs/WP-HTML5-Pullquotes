@@ -44,7 +44,7 @@
 	</target>
 
 	<target name="deploy.remote.test">
-		<scp username="matthew" pubkeyfile="/home/matthew/.ssh/id_rsa" host="solusar" todir="/home/matthew/istyle/wp-content/plugins/${phing.project.name}">
+		<scp username="matthew" pubkeyfile="/home/matthew/.phing-ssh/id_dsa.pub" privkeyfile="/home/matthew/.phing-ssh/id_dsa" host="192.168.1.50" todir="/home/matthew/istyle/wp-content/plugins/${phing.project.name}" level="debug">
 			 <fileset refid="files.plugin" />
 		</scp>
 	</target>
