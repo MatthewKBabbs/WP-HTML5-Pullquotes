@@ -60,7 +60,7 @@ function html5_pullquotes_admin_init(){
 
 // Callback to provide descriptive text for plugin_styles section
 function plugin_styles_section_callback() {
-	echo '<p>Choose how pullquotes should be styled. Don&rsquo;t disable style injection unless your theme already provides styles for HTML5 pullquotes.</p>';
+	echo '<p>Choose how pullquotes should be styled. Always keep style injection enabled unless your theme provides its own styles for HTML5 pullquotes.</p>';
 }
 // Callback to provide descriptive text for legacy_compatibility section
 function legacy_compatibility_section_callback() {
@@ -94,17 +94,7 @@ function show_vert_borders_callback() {
 }
 function border_style_callback() {
 	$options = get_option('html5_pullquotes_plugin_options');
-	$possible_values = array(
-		'1' => 'none',
-		'2' => 'dotted',
-		'3' => 'dashed',
-		'4' => 'solid',
-		'5' => 'double',
-		'6' => 'groove',
-		'7' => 'ridge',
-		'8' => 'inset',
-		'9' => 'outset'
-	);
+	$possible_values = array('none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset');
 	if (!isset($options['border_style'])) {
 		$options['border_style'] = 'solid';
 	}
@@ -145,15 +135,52 @@ function force_legacy_compatibility_callback() {
 
 // Validate plugin options
 function html5_pullquotes_plugin_options_validate($input) {
+	// 0: validate inject_pullquote_styles setting
+	if (isset($input['inject_pullquote_styles']) && ($input['inject_pullquote_styles'] == true)) {
+		$valid_input['inject_pullquote_styles'] = true;
+	}
+	else $valid_input['inject_pullquote_styles'] = false;
 	// 1: validate font-size setting
 	$newinput['pullquote_font_size'] = trim($input['pullquote_font_size']);
 	if (preg_match('/^[a-z0-9]{1,25}$/i', $newinput['pullquote_font_size'])) {
 		$valid_input['pullquote_font_size'] = $newinput['pullquote_font_size'];
 	}
-	// 2: validate checkbox setting
-	if (isset($input['inject_pullquote_styles']) && ($input['inject_pullquote_styles'] == true)) {
-		$valid_input['inject_pullquote_styles'] = true;
-	} else $valid_input['inject_pullquote_styles'] = false;
+	// 2: validate show_horiz_borders
+	if (isset($input['show_horiz_borders']) && ($input['show_horiz_borders'] == true)) {
+		$valid_input['show_horiz_borders'] = true;
+	}
+	else $valid_input['show_horiz_borders'] = false;
+	// 3: validate show_vert_borders
+	if (isset($input['show_vert_borders']) && ($input['show_vert_borders'] == true)) {
+		$valid_input['show_vert_borders'] = true;
+	}
+	else $valid_input['show_vert_borders'] = false;
+	// 4: validate border_style
+	//$valid_border_styles = array('none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset');
+	$newinput['border_style'] = trim($input['border_style']);
+	if (preg_match('/^[a-z]{4,6}$/i', $newinput['border_style'])) {
+		$valid_input['border_style'] = $newinput['border_style'];
+	}
+	// 5: validate border_width
+	$newinput['border_width'] = trim($input['border_width']);
+	if (preg_match('/^[a-z0-9]{0,25}$/i', $newinput['border_width'])) {
+		$valid_input['border_width'] = $newinput['border_width'];
+	}
+	// 6: validate border_color
+	$newinput['border_color'] = trim($input['border_color']);
+	if (preg_match('/^[a-z]{0,25}$/i', $newinput['border_color'])) {
+		$valid_input['border_color'] = $newinput['border_color'];
+	}
+	// 7: validate background_color
+	$newinput['background_color'] = trim($input['background_color']);
+	if (preg_match('/^[a-z]{0,25}$/i', $newinput['background_color'])) {
+		$valid_input['background_color'] = $newinput['background_color'];
+	}
+	// 8: validate force_legacy_compatibility
+	if (isset($input['force_legacy_compatibility']) && ($input['force_legacy_compatibility'] == true)) {
+		$valid_input['force_legacy_compatibility'] = true;
+	}
+	else $valid_input['force_legacy_compatibility'] = false;
 	// Last: return array with all valid inputs
 	return $valid_input;
 }
