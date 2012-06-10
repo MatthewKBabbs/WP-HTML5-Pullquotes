@@ -209,6 +209,4 @@ function html5_pullquotes_options_init() {
 	}
 	update_option('html5_pullquotes_plugin_options', $html5_pullquotes_options);
 }
-// Register the action to create default options on plugin activation
-register_activation_hook( __FILE__, 'html5_pullquotes_options_init' );
 ?>

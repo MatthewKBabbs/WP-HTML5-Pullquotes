@@ -30,6 +30,9 @@ License: GPL3
 $html5_pullquotes_admin = plugins_url('settings.php', __FILE__);
 include 'settings.php';
 
+// Register the action to create default options on plugin activation
+register_activation_hook( __FILE__, 'html5_pullquotes_options_init' );
+
 // Add data-pullquote attribute to TinyMCE
 function istyle_data_pullquote_attributes($initArray) {
 	$ext = 'p[data-pullquote],li[data-pullquote],ul[data-pullquote],ol[data-pullquote],div[data-pullquote],span[data-pullquote]';
