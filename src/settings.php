@@ -140,7 +140,7 @@ function html5_pullquotes_plugin_options_validate($input) {
 		$valid_input['inject_pullquote_styles'] = true;
 	}
 	else $valid_input['inject_pullquote_styles'] = false;
-	// 1: validate font-size setting
+	// 1: validate pullquote_font_size setting
 	$newinput['pullquote_font_size'] = trim($input['pullquote_font_size']);
 	if (preg_match('/^[a-z0-9]{1,25}$/i', $newinput['pullquote_font_size'])) {
 		$valid_input['pullquote_font_size'] = $newinput['pullquote_font_size'];
@@ -184,4 +184,31 @@ function html5_pullquotes_plugin_options_validate($input) {
 	// Last: return array with all valid inputs
 	return $valid_input;
 }
+
+// Activating for the first time? Let's set up some default options.
+function html5_pullquotes_get_defaults() {
+	$default_options = array (
+		'inject_pullquote_styles' => true,
+		'pullquote_font_size' => '32px',
+		'show_horiz_borders' => true,
+		'show_vert_borders' => false,
+		'border_style' => 'solid',
+		'border_width' => '1px',
+		'border_color' => '333333',
+		'background_color' => 'transparent',
+		'force_legacy_compatibility' => false
+	);
+	return $default_options;
+}
+function html5_pullquotes_options_init() {
+	// Check if options already exist; if not, set defaults. 
+	global $html5_pullquotes_options;
+	$html5_pullquotes_options = get_option('html5_pullquotes_plugin_options');
+	if ($html5_pullquotes_options === false) {
+		$html5_pullquotes_options = html5_pullquotes_get_defaults();
+	}
+	update_option('html5_pullquotes_plugin_options', $html5_pullquotes_options);
+}
+// Register the action to create default options on plugin activation
+register_activation_hook( __FILE__, 'html5_pullquotes_options_init' );
 ?>
