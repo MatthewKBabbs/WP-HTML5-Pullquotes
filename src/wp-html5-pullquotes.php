@@ -51,7 +51,7 @@ function html5_pullquotes() {
 	$html5_pullquotes_options = get_option('html5_pullquotes_plugin_options');
 
 	// Register styles & script for theme
-	wp_register_style( 'html5-pullquote-styles', plugins_url('pullquote-styles.php?theme.css', __FILE__) );
+	wp_register_style( 'html5-pullquote-styles', plugins_url('pullquote-styles.php?css=theme.css', __FILE__) );
 	wp_register_script('html5-pullquotes-legacy-compatibility', plugins_url('html5-pullquote-legacy-support.js', __FILE__), array('jquery'), false, true);
 
 	// If injecting styles:
@@ -75,7 +75,7 @@ function istyle_data_pullquote_mce_css($mce_css) {
 	if (!empty($mce_css)) {
 		$mce_css .= ',';
 	}
-	$mce_css .= plugins_url('pullquote-styles.php?editor.css', __FILE__);
+	$mce_css .= plugins_url('pullquote-styles.php?css=editor.css', __FILE__);
 	return $mce_css;
 }
 
